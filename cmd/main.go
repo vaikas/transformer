@@ -49,18 +49,18 @@ func (s *stepper) gotEvent(ctx context.Context, event cloudevents.Event, resp *c
 	fmt.Printf("Got Transport Context: %+v\n", cloudevents.HTTPTransportContextFrom(ctx))
 	fmt.Printf("----------------------------\n")
 
-	r := cloudevents.Event{
-		Context: cloudevents.EventContextV02{
-			Source: *cloudevents.ParseURLRef(fmt.Sprintf("/transformer/%s", s.step)),
-			Type:   "samples.http.mod3",
-		}.AsV02(),
-		Data: Example{
-			Sequence: data.Sequence,
-			// Just tack our sequence number to the Message to demo changing the event as it traverses
-			// the sequence.
-			Message: fmt.Sprintf("%s - Handled by %s", data.Message, s.step),
-		},
+	responseData := Example{
+		Sequence: data.Sequence,
+		// Just tack our step number to the Message to demo changing the event as it traverses
+		// the sequence.
+		Message: fmt.Sprintf("%s - Handled by %s", data.Message, s.step),
 	}
+
+	r := cloudevents.NewEvent()
+	r.SetSource(fmt.Sprintf("/transformer/%s", s.step))
+	r.SetType("samples.http.mod3")
+	r.SetID(event.Context.GetID())
+	r.SetData(responseData)
 	resp.RespondWith(200, &r)
 	return nil
 }
