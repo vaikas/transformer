@@ -1,0 +1,11 @@
+apiVersion: serving.knative.dev/v1beta1
+kind: Service
+metadata:
+  name: transformer
+spec:
+  template:
+    spec:
+      containers:
+      - image: us.gcr.io/probable-summer-223122/cmd-03315b715ae8f3e08e3a9378df706fbb@sha256:bad3de622444b4416b8d6c3cdaa1e4997ecdf9f347796604cb74c660e974f0d0
+
+---

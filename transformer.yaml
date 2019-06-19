@@ -1,0 +1,10 @@
+---
+apiVersion: serving.knative.dev/v1beta1
+kind: Service
+metadata:
+  name: transformer
+spec:
+  template:
+    spec:
+      containers:
+      - image: github.com/vaikas-google/transformer/cmd/
