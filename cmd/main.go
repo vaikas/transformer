@@ -6,7 +6,7 @@ import (
 	"log"
 	"os"
 
-	"github.com/cloudevents/sdk-go"
+	cloudevents "github.com/cloudevents/sdk-go"
 	"github.com/kelseyhightower/envconfig"
 )
 
@@ -61,6 +61,7 @@ func (s *stepper) gotEvent(ctx context.Context, event cloudevents.Event, resp *c
 	r.SetType("samples.http.mod3")
 	r.SetID(event.Context.GetID())
 	r.SetData(responseData)
+	r.SetDataContentType(cloudevents.ApplicationJSON)
 	resp.RespondWith(200, &r)
 	return nil
 }
