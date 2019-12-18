@@ -1,6 +1,6 @@
 # Simple Knative Transformer
 **DEPRECATED**
-[Moved to](https://github.com/knative/eventing-contrib/tree/master/cmd/appender)
+[Moved to knative.dev/eventing-contrib](https://github.com/knative/eventing-contrib/tree/master/cmd/appender)
 
 This simple repo is used to demonstrate Knative Sequences. It creates a container
 which listens for `CloudEvents` and assumes the incoming data is produced by
